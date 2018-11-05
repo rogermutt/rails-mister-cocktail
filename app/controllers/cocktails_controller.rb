@@ -12,7 +12,9 @@ class CocktailsController < ApplicationController
   end
 
   def create
+    dif_int = params[:difficulty].to_i
     @cocktail = Cocktail.new(set_params)
+    @cocktail.difficulty = %w[Easy Medium Hard][dif_int]
     @cocktail.save!
     redirect_to cocktails_path
   end
@@ -28,10 +30,17 @@ class CocktailsController < ApplicationController
     render :index
   end
 
+  def difficulty
+    @cocktails = Cocktail.where('difficulty = ?', params[:difficulty])
+    @results_found = @cocktails.length.positive? ? true : false
+    render :index
+
+  end
+
   private
 
   def set_params
-    params.require(:cocktail).permit(:name)
+    params.require(:cocktail).permit(:name, :difficulty)
   end
 
   def set_cocktail

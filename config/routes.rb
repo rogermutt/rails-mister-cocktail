@@ -5,6 +5,8 @@ Rails.application.routes.draw do
 
   get 'top', to: 'cocktails#top', as: 'top'
 
+  get 'get/:difficulty', to: 'cocktails#difficulty', as: 'diff'
+
   resources :cocktails, except: [:destroy] do
     resources :doses, only: %i[new create destroy]
   end

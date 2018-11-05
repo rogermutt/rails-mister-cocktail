@@ -1,0 +1,23 @@
+<div class="container">
+  <div class="row">
+    <div class="filter-section">
+
+      <div class="title-banner">
+        <h1><%= name %></h1>
+      </div>
+
+        <% diff_text = %w[Easy Medium Hard] %>
+        <% difficulty.each_with_index do |num,idx| %>
+
+            <div class="banner-filters">
+              <%= render partial: 'shared/notification', locals: {
+                text: diff_text[idx.to_i],
+                number: num}
+              %>
+            </div>
+
+        <% end %>
+
+    </div>
+  </div>
+</div>
