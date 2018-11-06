@@ -17,10 +17,13 @@
 .cocktail-finder-input.expanded {
     max-width:200px;
     opacity:1;
+    height: 25px;
 }
 .cocktail-finder-btn {
     width: 25px;
     height: 25px;
-    background: $blue;
+    background-color: $green;
     position: absolute;
+    border-radius: 5px;
+
 }

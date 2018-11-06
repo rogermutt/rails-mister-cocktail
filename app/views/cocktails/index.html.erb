@@ -4,43 +4,76 @@
   <% @cocktails.count {|c| c.difficulty == diff } %>
 <% end %>
 
-<%= render partial: 'shared/banner', locals: {
-  name: "Welcome",
-  difficulty: diff_arr}
-%>
+<div class="banner-section">
+  Let's mix a beautiful cocktail
+</div>
+
+<div class="banner-section">
+
+        <% diff_text = %w[Easy Medium Hard] %>
+        <div class="banner-filters">
+        <% diff_arr.each_with_index do |num,idx| %>
+
+          <%= render partial: 'shared/notification', locals: {
+            text: diff_text[idx.to_i],
+            number: num}
+          %>
+
+        <% end %>
+        </div>
+</div>
+
+
+<% ran_num_one = rand(3..@cocktails.length)  %>
 
 <% if @results_found %>
 
 <div class="container">
     <div class="row">
-      <% @cocktails.each do |cocktail| %>
+      <% @cocktails.each_with_index do |cocktail, index| %>
+
+          <% if (@cocktails.length / 2).round == index %>
+              <%= render partial: 'shared/message', locals: {
+                message: 'Looking for inspiration?',
+                action: 'Newsletter' }
+              %>
+          <% end %>
+
+          <% if (@cocktails.length) == index %>
+              <%= render partial: 'shared/message', locals: {
+                message: 'Looking for inspiration?',
+                action: 'Newsletter' }
+              %>
+          <% end %>
 
           <div class="col-xs-12 col-sm-4">
+              <div class="cocktail-content">
+                  <%= render partial: 'shared/cocktail', locals: {
+                    name: cocktail.name,
+                    difficulty: cocktail.difficulty,
+                    image: cocktail.photo,
+                    id: cocktail.id }
+                  %>
 
-              <%= render partial: 'shared/cocktail', locals: {
-                name: cocktail.name,
-                difficulty: cocktail.difficulty,
-                id: cocktail.id }
-              %>
-
-              <%= render partial: 'shared/icon', locals: { num: cocktail.ingredients.length }%>
-
-              <%= link_to "Details", cocktail_path(cocktail) %>
-
-              <%= link_to delete_cocktail_path(cocktail), method: :delete do %>
-                  <i class="fas fa-trash"></i>
-              <% end %>
+                  <%= render partial: 'shared/icon', locals: { num: cocktail.ingredients.length }%>
+                  <%= link_to "Details", cocktail_path(cocktail) %>
+                  <%= link_to delete_cocktail_path(cocktail), method: :delete do %>
+                      <i class="fas fa-trash"></i>
+                  <% end %>
+              </div>
           </div>
       <% end%>
     </div>
+
+<div class="add-cocktail-section">
     <%= link_to 'Add cocktail', new_cocktail_path %>
+</div>
+
 </div
-
-
 
 <% else %>
 
-<div class="container">
+<div class="no-results-container">
   <div class="row">
     <h3 class="text-center">No results found</h3>
   </div>
@@ -48,9 +81,7 @@
 
 <% end  %>
 
-
-
-
+<%= render partial: 'shared/footer'%>
 
 
 

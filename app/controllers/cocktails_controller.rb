@@ -1,5 +1,4 @@
 class CocktailsController < ApplicationController
-
   before_action :set_cocktail, only: %i[show edit update destroy]
 
   def index
@@ -34,13 +33,12 @@ class CocktailsController < ApplicationController
     @cocktails = Cocktail.where('difficulty = ?', params[:difficulty])
     @results_found = @cocktails.length.positive? ? true : false
     render :index
-
   end
 
   private
 
   def set_params
-    params.require(:cocktail).permit(:name, :difficulty)
+    params.require(:cocktail).permit(:name, :difficulty, :photo)
   end
 
   def set_cocktail

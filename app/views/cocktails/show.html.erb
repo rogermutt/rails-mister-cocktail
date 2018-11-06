@@ -1,20 +1,27 @@
-<h1><%= @cocktail.name %></h1>
+<div class="banner-section">
+  <%= @cocktail.name %>
+</div>
 
-<%= link_to 'Add ingredient', new_cocktail_dose_path(@cocktail) %>
+<div class="show-cocktail-container">
+     <%= link_to 'Add ingredient', new_cocktail_dose_path(@cocktail) %>
 
-<br><br>
+    <ul>
+      <% @cocktail.doses.each do |dose| %>
+        <li><%= dose.ingredient.name %></li>
+        <%= link_to "Delete", cocktail_dose_path(@cocktail, dose), class:"btn btn-primary",
+              method: :delete,
+              data: { confirm: "Are you sure?" } %>
+      <% end %>
+    </ul>
 
-<ul>
-  <% @cocktail.doses.each do |dose| %>
-    <li><%= dose.ingredient.name %></li>
-    <%= link_to "Delete", cocktail_dose_path(@cocktail, dose), class:"btn btn-primary",
-          method: :delete,
-          data: { confirm: "Are you sure?" } %>
-  <% end %>
-</ul>
+    <%= cl_image_tag @cocktail.photo, height: 300, width: 400, crop: :fill %>
+
+</div>
+
+<div class="footer-section">
+  <%= link_to 'Back', cocktails_path %>
+</div>
 
 
-<br><br>
 
-<%= link_to 'Back', cocktails_path %>
 

@@ -1,7 +1,7 @@
 <div class="navbar-wagon">
   <!-- Logo -->
   <a href="/cocktails" class="navbar-wagon-brand">
-    <img src="images/logo.png" alt="logo">
+    <%= image_tag("logo.png", class: "green-color")  %>
   </a>
 
   <!-- Right Navigation -->
@@ -11,7 +11,9 @@
   <div class="search-box navbar-wagon-item dropdown">
     <form class="cocktail-finder-form" action="/top">
       <input type="text" class="cocktail-finder-input" name="query" placeholder="Find">
-      <a href="#" class="btn btn-primary cocktail-finder-btn"><i class="fas fa-search"></i></a>
+      <a href="#" class="btn btn-primary cocktail-finder-btn">
+        <i class="fas fa-search"></i>
+      </a>
     </form>
   </div>
 
